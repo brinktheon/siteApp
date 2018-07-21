@@ -19,7 +19,7 @@ public class Doctor implements Serializable{
     private String firstName;
 
     @NotBlank
-    private String sureName;
+    private String secondName;
 
     @NotBlank
     private Long category;
@@ -49,12 +49,12 @@ public class Doctor implements Serializable{
         this.firstName = firstName;
     }
 
-    public String getSureName() {
-        return sureName;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setSureName(String sureName) {
-        this.sureName = sureName;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public Long getCategory() {
@@ -86,7 +86,7 @@ public class Doctor implements Serializable{
         return "Doctor{" +
                 "docId=" + docId +
                 ", firstName='" + firstName + '\'' +
-                ", sureName='" + sureName + '\'' +
+                ", secondName='" + secondName + '\'' +
                 ", category=" + category +
                 ", specialty='" + specialty + '\'' +
                 ", workingTime='" + workingTime + '\'' +

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+</head>
+<body ng-app="mainApp">
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" ui-sref="main">Specialties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" ui-sref="employee">Employees</a>
+    </li>
+</ul>
+
+<ui-view></ui-view>
+
+<script type="text/javascript" src="../lib/angular/angular.js"></script>
+<script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript" src="../js/employees.js"></script>
+<script type="text/javascript" src="../lib/scrollDirective/lazy-scroll.min.js"></script>
+<script type="text/javascript" src="../js/employeeSpeciality.js"></script>
+<script type="text/javascript" src="../lib/angular/angular-ui-router.js"></script>
+</body>
+</html>

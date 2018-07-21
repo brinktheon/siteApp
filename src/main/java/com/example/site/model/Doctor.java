@@ -25,7 +25,7 @@ public class Doctor implements Serializable{
     private Long category;
 
     @NotBlank
-    private String specialties;
+    private String specialty;
 
     @NotBlank
     private String workingTime;
@@ -65,12 +65,12 @@ public class Doctor implements Serializable{
         this.category = category;
     }
 
-    public String getSpecialties() {
-        return specialties;
+    public String getSpecialty() {
+        return specialty;
     }
 
-    public void setSpecialties(String specialties) {
-        this.specialties = specialties;
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
     }
 
     public String getWorkingTime() {
@@ -88,7 +88,7 @@ public class Doctor implements Serializable{
                 ", firstName='" + firstName + '\'' +
                 ", sureName='" + sureName + '\'' +
                 ", category=" + category +
-                ", specialties='" + specialties + '\'' +
+                ", specialty='" + specialty + '\'' +
                 ", workingTime='" + workingTime + '\'' +
                 '}';
     }

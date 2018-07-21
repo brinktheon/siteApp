@@ -31,8 +31,17 @@ public class EntityController {
         return service.getDoctors(page, size);
     }
 
-    @GetMapping("/doctors/{specialty}")
-    public List<Doctor> getDoctorsBySeprcialty(@PathVariable(value = "specialty") String specialty){
-        return service.getDoctorsBySpecialty(specialty);
+//    @GetMapping("/doctors/{specialty}")
+//    public List<Doctor> getDoctorsBySeprcialty(@PathVariable(value = "specialty") String specialty){
+//        return service.getDoctorsBySpecialty(specialty);
+//    }
+
+    @RequestMapping(
+            value = "/doctors/{specialty}",
+            params = {"page", "size"},
+            method = RequestMethod.GET
+    )
+    public List<Doctor> getDoctorsBySeprcialty(@RequestParam("page") int page, @RequestParam("size") int size, @PathVariable(value = "specialty") String specialty){
+        return service.getDoctorsBySpecialty(page, size, specialty);
     }
 }

@@ -8,5 +8,5 @@ public interface DocService {
 
     List<Doctor> getDoctors(int page, int size);
 
-    List<Doctor> getDoctorsBySpecialty(String specialty);
+    List<Doctor> getDoctorsBySpecialty(int page, int size, String specialty);
 }

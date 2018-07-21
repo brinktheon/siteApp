@@ -23,8 +23,7 @@ public class DocServiceImpl implements DocService{
         return repository.findAll(PageRequest.of(page, size)).getContent();
     }
 
-    public List<Doctor> getDoctorsBySpecialty(String specialty){
-        return repository.findBySpecialty(specialty);
+    public List<Doctor> getDoctorsBySpecialty(int page, int size, String specialty){
+        return repository.findBySpecialty(specialty, PageRequest.of(page, size)).getContent();
     }
-
 }

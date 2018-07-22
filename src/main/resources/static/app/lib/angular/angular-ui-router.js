@@ -2,7 +2,7 @@
  * State-based routing for AngularJS 1.x
  * NOTICE: This monolithic bundle also bundles the @uirouter/core code.
  *         This causes it to be incompatible with plugins that depend on @uirouter/core.
- *         We recommend switching to the ui-router-core.js and ui-router-angularjs.js bundles instead.
+ *         We recommend switching to the ui-router-core.app and ui-router-angularjs.app bundles instead.
  *         For more information, see https://ui-router.github.io/blog/uirouter-for-angularjs-umd-bundles
  * @version v1.0.18
  * @link https://ui-router.github.io
@@ -505,7 +505,7 @@
      *
      * #### Example:
      * This example creates an new class instance whose functions are prebound to the new'd object.
-     * ```js
+     * ```app
      * class Foo {
      *   constructor(data) {
      *     // Binds all functions from Foo.prototype to 'this',
@@ -1176,25 +1176,25 @@
      * To enable tracing, import the [[Trace]] singleton and enable one or more categories.
      *
      * ### ES6
-     * ```js
+     * ```app
      * import {trace} from "@uirouter/core";
      * trace.enable(1, 5); // TRANSITION and VIEWCONFIG
      * ```
      *
      * ### CJS
-     * ```js
+     * ```app
      * let trace = require("@uirouter/core").trace;
      * trace.enable("TRANSITION", "VIEWCONFIG");
      * ```
      *
      * ### Globals
-     * ```js
+     * ```app
      * let trace = window["@uirouter/core"].trace;
      * trace.enable(); // Trace everything (very verbose)
      * ```
      *
      * ### Angular 1:
-     * ```js
+     * ```app
      * app.run($trace => $trace.enable());
      * ```
      *
@@ -1287,7 +1287,7 @@
         /**
          * Retrieves the enabled stateus of a [[Category]]
          *
-         * ```js
+         * ```app
          * trace.enabled("VIEWCONFIG"); // true or false
          * ```
          *
@@ -1399,7 +1399,7 @@
      * The [[Trace]] singleton
      *
      * #### Example:
-     * ```js
+     * ```app
      * import {trace} from "@uirouter/core";
      * trace.enable(1, 5);
      * ```
@@ -1589,7 +1589,7 @@
          * Each hook is invoked after the previous one completes.
          *
          * #### Example:
-         * ```js
+         * ```app
          * var hooks: TransitionHook[] = getHooks();
          * let promise: Promise<any> = TransitionHook.chain(hooks);
          *
@@ -1828,7 +1828,7 @@
          *
          * Returns an object which has all the criteria match paths as keys and `true` as values, i.e.:
          *
-         * ```js
+         * ```app
          * {
          *   to: true,
          *   from: true,
@@ -1845,7 +1845,7 @@
          *
          * Create a IMatchingNodes object from the TransitionHookTypes that is roughly equivalent to:
          *
-         * ```js
+         * ```app
          * let matches: IMatchingNodes = {
          *   to:       _matchingNodes([tail(treeChanges.to)],   mc.to),
          *   from:     _matchingNodes([tail(treeChanges.from)], mc.from),
@@ -2034,7 +2034,7 @@
      * Used by [[UrlMatcher]] when matching or formatting URLs, or comparing and validating parameter values.
      *
      * #### Example:
-     * ```js
+     * ```app
      * var paramTypeDef = {
      *   decode: function(val) { return parseInt(val, 10); },
      *   encode: function(val) { return val && val.toString(); },
@@ -3110,7 +3110,7 @@
          * The `UIInjector` can also provide values from the native root/global injector (ng1/ng2).
          *
          * #### Example:
-         * ```js
+         * ```app
          * .onEnter({ entering: 'myState' }, trans => {
          *   var myResolveValue = trans.injector().get('myResolve');
          *   // Inject a global service from the global/native injector (if it exists)
@@ -3121,7 +3121,7 @@
          * In some cases (such as `onBefore`), you may need access to some resolve data but it has not yet been fetched.
          * You can use [[UIInjector.getAsync]] to get a promise for the data.
          * #### Example:
-         * ```js
+         * ```app
          * .onBefore({}, trans => {
          *   return trans.injector().getAsync('myResolve').then(myResolveValue =>
          *     return myResolveValue !== 'ABORT';
@@ -3132,7 +3132,7 @@
          * If a `state` is provided, the injector that is returned will be limited to resolve values that the provided state has access to.
          * This can be useful if both a parent state `foo` and a child state `foo.bar` have both defined a resolve such as `data`.
          * #### Example:
-         * ```js
+         * ```app
          * .onEnter({ to: 'foo.bar' }, trans => {
          *   // returns result of `foo` state's `myResolve` resolve
          *   // even though `foo.bar` also has a `myResolve` resolve
@@ -3143,7 +3143,7 @@
          * If you need resolve data from the exiting states, pass `'from'` as `pathName`.
          * The resolve data from the `from` path will be returned.
          * #### Example:
-         * ```js
+         * ```app
          * .onExit({ exiting: 'foo.bar' }, trans => {
          *   // Gets the resolve value of `myResolve` from the state being exited
          *   var fooData = trans.injector(null, 'from').get('myResolve');
@@ -3174,7 +3174,7 @@
          *
          * #### Example:
          * This example logs all resolve values
-         * ```js
+         * ```app
          * let tokens = trans.getResolveTokens();
          * tokens.forEach(token => console.log(token + " = " + trans.injector().get(token)));
          * ```
@@ -3183,7 +3183,7 @@
          * This example creates promises for each resolve value.
          * This triggers fetches of resolves (if any have not yet been fetched).
          * When all promises have all settled, it logs the resolve values.
-         * ```js
+         * ```app
          * let tokens = trans.getResolveTokens();
          * let promise = tokens.map(token => trans.injector().getAsync(token));
          * Promise.all(promises).then(values => console.log("Resolved values: " + values));
@@ -3215,7 +3215,7 @@
          * The resolved data is available from the injector for that `state` and any children states.
          *
          * #### Example:
-         * ```js
+         * ```app
          * transitionService.onBefore({}, transition => {
          *   transition.addResolvable({
          *     token: 'myResolve',
@@ -3243,7 +3243,7 @@
          * If the current transition is a redirect, this method returns the transition that was redirected.
          *
          * #### Example:
-         * ```js
+         * ```app
          * let transitionA = $state.go('A').transition
          * transitionA.onStart({}, () => $state.target('B'));
          * $transitions.onSuccess({ to: 'B' }, (trans) => {
@@ -3264,7 +3264,7 @@
          * This method walks the [[redirectedFrom]] chain back to the original (first) transition in the chain.
          *
          * #### Example:
-         * ```js
+         * ```app
          * // states
          * registry.register({ name: 'A', redirectTo: 'B' });
          * registry.register({ name: 'B', redirectTo: 'C' });
@@ -3678,7 +3678,7 @@
      * Splits on a delimiter, but returns the delimiters in the array
      *
      * #### Example:
-     * ```js
+     * ```app
      * var splitOnSlashes = splitOnDelim('/');
      * splitOnSlashes("/foo"); // ["/", "foo"]
      * splitOnSlashes("/foo/"); // ["/", "foo", "/"]
@@ -3695,7 +3695,7 @@
      * where all neighboring strings have been joined.
      *
      * #### Example:
-     * ```js
+     * ```app
      * let arr = ["foo", "bar", 1, "baz", "", "qux" ];
      * arr.reduce(joinNeighborsR, []) // ["foobar", 1, "bazqux" ]
      * ```
@@ -4384,7 +4384,7 @@
          * Adds a callback that is invoked when states are registered or deregistered with the StateRegistry.
          *
          * #### Example:
-         * ```js
+         * ```app
          * let allStates = registry.get();
          *
          * // Later, invoke deregisterFn() to remove the listener
@@ -4801,7 +4801,7 @@
          * as optional.
          *
          * #### Example:
-         * ```js
+         * ```app
          * new UrlMatcher('/user/{id}?q&r').exec('/user/bob', {
          *   x: '1', q: 'hello'
          * });
@@ -4930,7 +4930,7 @@
          * for the path and search parameters.
          *
          * #### Example:
-         * ```js
+         * ```app
          * new UrlMatcher('/user/{id}?q').format({ id:'bob', q:'yes' });
          * // returns '/user/bob?q=yes'
          * ```
@@ -5183,7 +5183,7 @@
          * - router: the router object ([[UIRouter]])
          *
          * #### Example:
-         * ```js
+         * ```app
          * var urlMatcher = $umf.compile("/foo/:fooId/:barId");
          * var rule = factory.fromUrlMatcher(urlMatcher, match => "/home/" + match.fooId + "/" + match.barId);
          * var match = rule.match('/foo/123/456'); // results in { fooId: '123', barId: '456' }
@@ -5197,7 +5197,7 @@
          * The url is replaced with the result.
          *
          * #### Example:
-         * ```js
+         * ```app
          * var urlMatcher = $umf.compile("/foo/:fooId/:barId");
          * var handler = $umf.compile("/home/:fooId/:barId");
          * var rule = factory.fromUrlMatcher(urlMatcher, handler);
@@ -5234,7 +5234,7 @@
          * A UrlRule which matches a state by its url
          *
          * #### Example:
-         * ```js
+         * ```app
          * var rule = factory.fromState($state.get('foo'), router);
          * var match = rule.match('/foo/123/456'); // results in { fooId: '123', barId: '456' }
          * var result = rule.handler(match);
@@ -5273,7 +5273,7 @@
          * - router: the router object ([[UIRouter]])
          *
          * #### Example:
-         * ```js
+         * ```app
          * var rule = factory.fromRegExp(/^\/foo\/(bar|baz)$/, match => "/home/" + match[1])
          * var match = rule.match('/foo/bar'); // results in [ '/foo/bar', 'bar' ]
          * var result = rule.handler(match); // '/home/bar'
@@ -5285,7 +5285,7 @@
          * The string is first interpolated using `string.replace()` style pattern.
          *
          * #### Example:
-         * ```js
+         * ```app
          * var rule = factory.fromRegExp(/^\/foo\/(bar|baz)$/, "/home/$1")
          * var match = rule.match('/foo/bar'); // results in [ '/foo/bar', 'bar' ]
          * var result = rule.handler(match); // '/home/bar'
@@ -5525,7 +5525,7 @@
          * Builds and returns a URL with interpolated parameters
          *
          * #### Example:
-         * ```js
+         * ```app
          * matcher = $umf.compile("/about/:person");
          * params = { person: "bob" };
          * $bob = $urlRouter.href(matcher, params);
@@ -6145,7 +6145,7 @@
          * A plugin can enhance or change UI-Router behavior using any public API.
          *
          * #### Example:
-         * ```js
+         * ```app
          * import { MyCoolPlugin } from "ui-router-cool-plugin";
          *
          * var plugin = router.addPlugin(MyCoolPlugin);
@@ -6161,7 +6161,7 @@
          * The plugin can then be published as a separate module.
          *
          * #### Example:
-         * ```js
+         * ```app
          * export class MyAuthPlugin implements UIRouterPlugin {
          *   constructor(router: UIRouter, options: any) {
          *     this.name = "MyAuthPlugin";
@@ -7015,7 +7015,7 @@
          * has been called with an invalid state reference parameter
          *
          * Example:
-         * ```js
+         * ```app
          * stateService.onInvalid(function(to, from, injector) {
          *   if (to.name() === 'foo') {
          *     let lazyLoader = injector.get('LazyLoadService');
@@ -7045,7 +7045,7 @@
          * All resolves are re-resolved, and components reinstantiated.
          *
          * #### Example:
-         * ```js
+         * ```app
          * let app angular.module('app', ['ui.router']);
          *
          * app.controller('ctrl', function ($scope, $state) {
@@ -7057,7 +7057,7 @@
          *
          * Note: `reload()` is just an alias for:
          *
-         * ```js
+         * ```app
          * $state.transitionTo($state.current, $state.params, {
          *   reload: true, inherit: false
          * });
@@ -7067,7 +7067,7 @@
          *    If present, this state and all its children will be reloaded, but ancestors will not reload.
          *
          * #### Example:
-         * ```js
+         * ```app
          * //assuming app application consists of 3 states: 'contacts', 'contacts.detail', 'contacts.detail.item'
          * //and current state is 'contacts.detail.item'
          * let app angular.module('app', ['ui.router']);
@@ -7101,7 +7101,7 @@
          * inherit from the current parameter values (because of `inherit: true`).
          *
          * #### Example:
-         * ```js
+         * ```app
          * let app = angular.module('app', ['ui.router']);
          *
          * app.controller('ctrl', function ($scope, $state) {
@@ -7166,7 +7166,7 @@
          * The [[go]] method (which uses `transitionTo` internally) is recommended in most situations.
          *
          * #### Example:
-         * ```js
+         * ```app
          * let app = angular.module('app', ['ui.router']);
          *
          * app.controller('ctrl', function ($scope, $state) {
@@ -7245,7 +7245,7 @@
          * active params object, so all params must match with none missing and no extras.
          *
          * #### Example:
-         * ```js
+         * ```app
          * $state.$current.name = 'contacts.details.item';
          *
          * // absolute name
@@ -7288,7 +7288,7 @@
          * Not all the parameters need to be passed, just the ones you'd like to test for equality.
          *
          * #### Example when `$state.$current.name === 'contacts.details.item'`
-         * ```js
+         * ```app
          * // Using partial names
          * $state.includes("contacts"); // returns true
          * $state.includes("contacts.details"); // returns true
@@ -7298,7 +7298,7 @@
          * ```
          *
          * #### Glob Examples when `* $state.$current.name === 'contacts.details.item.url'`:
-         * ```js
+         * ```app
          * $state.includes("*.details.*.*"); // returns true
          * $state.includes("*.details.**"); // returns true
          * $state.includes("**.item.**"); // returns true
@@ -7342,7 +7342,7 @@
          * Returns the url for the given state populated with the given params.
          *
          * #### Example:
-         * ```js
+         * ```app
          * expect($state.href("about.person", { person: "bob" })).toEqual("/about/bob");
          * ```
          *
@@ -7389,7 +7389,7 @@
          * You can provide your own custom handler.
          *
          * #### Example:
-         * ```js
+         * ```app
          * stateService.defaultErrorHandler(function() {
          *   // Do not log transitionTo errors
          * });
@@ -7528,7 +7528,7 @@
      * A function's `.toString()` is called, and the parameter names are parsed.
      * This only works when the parameter names aren't "mangled" by a minifier such as UglifyJS.
      *
-     * ```js
+     * ```app
      * function injectedFunction(FooService, BarService) {
      *   // FooService and BarService are injected
      * }
@@ -7538,7 +7538,7 @@
      *
      * A function may be annotated with an array of dependency names as the `$inject` property.
      *
-     * ```js
+     * ```app
      * injectedFunction.$inject = [ 'FooService', 'BarService' ];
      * function injectedFunction(fs, bs) {
      *   // FooService and BarService are injected as fs and bs parameters
@@ -7550,7 +7550,7 @@
      * An array provides the names of the dependencies to inject (as strings).
      * The function is the last element of the array.
      *
-     * ```js
+     * ```app
      * [ 'FooService', 'BarService', function (fs, bs) {
      *   // FooService and BarService are injected as fs and bs parameters
      * }]
@@ -8465,7 +8465,7 @@
          * #### Example:
          * Override the internal 'views' builder with a function that takes the state
          * definition, and a reference to the internal function being overridden:
-         * ```js
+         * ```app
          * $stateProvider.decorator('views', function (state, parent) {
          *   let result = {},
          *       views = parent(state);
@@ -8487,7 +8487,7 @@
          * ```
          *
          *
-         * ```js
+         * ```app
          * // Auto-populates list and item views with /partials/home/contact/list.html,
          * // and /partials/home/contact/item.html, respectively.
          * $state.go('home');
@@ -8664,7 +8664,7 @@
          * If a rule returns a string, the URL is replaced with the string, and all rules are fired again.
          *
          * #### Example:
-         * ```js
+         * ```app
          * var app = angular.module('app', ['ui.router.router']);
          *
          * app.config(function ($urlRouterProvider) {
@@ -8699,7 +8699,7 @@
          * Defines the path or behavior to use when no url can be matched.
          *
          * #### Example:
-         * ```js
+         * ```app
          * var app = angular.module('app', ['ui.router.router']);
          *
          * app.config(function ($urlRouterProvider) {
@@ -8754,7 +8754,7 @@
          * - **void** or any **truthy** value tells `$urlRouter` that the url was handled.
          *
          * #### Example:
-         * ```js
+         * ```app
          * var app = angular.module('app', ['ui.router.router']);
          *
          * app.config(function ($urlRouterProvider) {
@@ -8790,7 +8790,7 @@
          * Once the initialization is complete, call [[listen]] to tell UI-Router to start watching and synchronizing the URL.
          *
          * #### Example:
-         * ```js
+         * ```app
          * var app = angular.module('app', ['ui.router']);
          *
          * app.config(function ($urlRouterProvider) {
@@ -8943,7 +8943,7 @@
      * ### Instead of using the global `$stateParams` service object,
      * inject [[$uiRouterGlobals]] and use [[UIRouterGlobals.params]]
      *
-     * ```js
+     * ```app
      * MyService.$inject = ['$uiRouterGlobals'];
      * function MyService($uiRouterGlobals) {
      *   return {
@@ -8957,7 +8957,7 @@
      * ### Instead of using the per-transition `$stateParams` object,
      * inject the current `Transition` (as [[$transition$]]) and use [[Transition.params]]
      *
-     * ```js
+     * ```app
      * MyController.$inject = ['$transition$'];
      * function MyController($transition$) {
      *   var username = $transition$.params().username;
@@ -8970,7 +8970,7 @@
      * This object can be injected into other services.
      *
      * #### Deprecated Example:
-     * ```js
+     * ```app
      * SomeService.$inject = ['$http', '$stateParams'];
      * function SomeService($http, $stateParams) {
      *   return {
@@ -9700,7 +9700,7 @@
      * The above is a convenient shortcut equivalent to specifying your view explicitly with the
      * [[Ng1StateDeclaration.views]] config property, by name, in this case an empty name:
      *
-     * ```js
+     * ```app
      * $stateProvider.state("home", {
      *   views: {
      *     "": {
@@ -9718,7 +9718,7 @@
      * <div ui-view="main"></div>
      * ```
      *
-     * ```js
+     * ```app
      * $stateProvider.state("home", {
      *   views: {
      *     "main": {
@@ -9736,7 +9736,7 @@
      * <div ui-view="data"></div>
      * ```
      *
-     * ```js
+     * ```app
      * $stateProvider.state("home", {
      *   views: {
      *     "": {
@@ -9775,7 +9775,7 @@
      * depends on `$resolve` data.
      *
      * #### Example:
-     * ```js
+     * ```app
      * $stateProvider.state('home', {
      *   template: '<my-component user="$resolve.user"></my-component>',
      *   resolve: {
@@ -10278,4 +10278,4 @@
     Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-//# sourceMappingURL=angular-ui-router.js.map
+//# sourceMappingURL=angular-ui-router.app.map

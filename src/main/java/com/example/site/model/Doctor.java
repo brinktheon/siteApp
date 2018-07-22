@@ -1,9 +1,12 @@
 package com.example.site.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -12,25 +15,74 @@ public class Doctor implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(nullable = false)
+    @Column(nullable = false,
+            name = "docId")
     private Long docId;
 
-    @NotBlank
+    @NotNull
     private String firstName;
 
-    @NotBlank
+    @NotNull
     private String secondName;
 
-    @NotBlank
+    @NotNull
     private Long category;
 
-    @NotBlank
-    private String specialty;
-
-    @NotBlank
+    @NotNull
     private String workingTime;
 
+    @Transient
+    private String spec;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "doctor_specialty",
+            joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "docId"),
+            inverseJoinColumns = @JoinColumn(name = "specialty_id", referencedColumnName = "specId"))
+    @JsonManagedReference
+    private List<Specialty> specialties;
+
+    public void transferSpecialtiesToString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Specialty specialty : specialties) {
+            stringBuilder.append(specialty.getName()).append(", ");
+        }
+        spec = stringBuilder.toString();
+    }
+
     public Doctor() {
+    }
+
+    public Doctor(@NotNull String firstName,  @NotNull String secondName,  @NotNull Long category,  @NotNull String workingTime) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.category = category;
+        this.workingTime = workingTime;
+    }
+
+    public Doctor(Long docId, @NotNull String firstName,  @NotNull String secondName,  @NotNull Long category,  @NotNull String workingTime) {
+        this.docId = docId;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.category = category;
+        this.workingTime = workingTime;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    @Transient
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
+    public List<Specialty> getSpecialties() {
+        return specialties;
+    }
+
+    public void setSpecialties(List<Specialty> specialties) {
+        this.specialties = specialties;
     }
 
     public Long getDocId() {
@@ -65,31 +117,11 @@ public class Doctor implements Serializable{
         this.category = category;
     }
 
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
-
     public String getWorkingTime() {
         return workingTime;
     }
 
     public void setWorkingTime(String workingTime) {
         this.workingTime = workingTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Doctor{" +
-                "docId=" + docId +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", category=" + category +
-                ", specialty='" + specialty + '\'' +
-                ", workingTime='" + workingTime + '\'' +
-                '}';
     }
 }

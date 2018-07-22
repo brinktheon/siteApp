@@ -11,7 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DoctorRepository extends PagingAndSortingRepository<Doctor, Long> {
 
-    @Query("SELECT d FROM Doctor d WHERE LOWER(d.specialty) = LOWER(:specialty)")
+    @Query(
+            "select d from Doctor d " +
+            "inner join d.specialties ds " +
+            "where ds.name = 'Allergist'"
+            )
     Page<Doctor> findBySpecialty(@Param("specialty") String specialty, Pageable pageable);
-
 }

@@ -12,8 +12,44 @@ angular.module('viewCfg', ['ui.router'])
             url: '/allEmployee',
             templateUrl: 'employees.html'
         })
-        .state('spec', {
-                url: '/PharmacisSpec',
-                templateUrl: 'specialties.html'
-            });
+        .state('PharmacisSpec', {
+            url: '/PharmacisSpec/',
+            params: {
+                valueSpec: null
+            },
+            templateUrl: 'specialties.html',
+            controller: 'EmpSpecCtrl'
+            })
+        .state('AllergistSpec', {
+            url: '/AllergistSpec',
+            params: {
+                valueSpec: null
+            },
+            templateUrl: 'specialties.html',
+            controller: 'EmpSpecCtrl'
+        })
+        .state('CardiologistSpec', {
+            url: '/CardiologistSpec',
+            params: {
+                valueSpec: null
+            },
+            templateUrl: 'specialties.html',
+            controller: 'EmpSpecCtrl'
+        })
+        .state('GynecologistSpec', {
+            url: '/GynecologistSpec',
+            params: {
+                valueSpec: null
+            },
+            templateUrl: 'specialties.html',
+            controller: 'EmpSpecCtrl'
+        })
+        .state('OtolaryngologistSpec', {
+            url: '/OtolaryngologistSpec',
+            params: {
+                valueSpec: null
+            },
+            templateUrl: 'specialties.html',
+            controller: 'EmpSpecCtrl'
+        })
 });

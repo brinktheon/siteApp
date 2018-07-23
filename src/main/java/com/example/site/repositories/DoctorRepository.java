@@ -14,7 +14,7 @@ public interface DoctorRepository extends PagingAndSortingRepository<Doctor, Lon
     @Query(
             "select d from Doctor d " +
             "inner join d.specialties ds " +
-            "where ds.name = 'Allergist'"
+            "where ds.name = (:specialty)"
             )
     Page<Doctor> findBySpecialty(@Param("specialty") String specialty, Pageable pageable);
 }

@@ -15,15 +15,15 @@ angular.module('MainService', [])
                 });
         };
 
-        this.getSomeSpecData = function(){
-            return  $http.get("/api/doctors/Pharmacis?page=0&size=50")
+        this.getSomeSpecData = function(Spec){
+            return  $http.get("/api/doctors/" + Spec + "?page=0&size=50")
                 .then(function(response){
                     return response.data;
                 });
         };
 
-        this.loadMoreSpec = function(page){
-            return $http.get("/api/doctors/Pharmacis?page=" + page + "&size=30")
+        this.loadMoreSpec = function(page, Spec){
+            return $http.get("/api/doctors/" + Spec + "?page=" + page + "&size=30")
                 .then(function(response){
                     return response.data;
                 });

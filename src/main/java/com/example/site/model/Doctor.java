@@ -47,7 +47,7 @@ public class Doctor implements Serializable{
         for (Specialty specialty : specialties) {
             stringBuilder.append(specialty.getName()).append(", ");
         }
-        spec = stringBuilder.toString();
+        spec = stringBuilder.deleteCharAt(stringBuilder.length() - 2).toString();
     }
 
     public Doctor() {

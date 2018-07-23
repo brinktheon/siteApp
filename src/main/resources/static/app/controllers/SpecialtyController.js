@@ -1,5 +1,5 @@
 angular.module('app.controllers')
-    .controller('EmpSpecCtrl', ['$scope','EmployeesService', function ($scope, EmployeesService) {
+    .controller('EmpSpecCtrl', ['$scope','EmployeesService','ngDialog', function ($scope, EmployeesService,  ngDialog) {
         $scope.employees = [];
         $scope.someData = [];
         $scope.page = 0;
@@ -15,5 +15,21 @@ angular.module('app.controllers')
                 $scope.employees = $scope.employees.concat(data);
             });
             $scope.someData = $scope.employees.slice(0, $scope.someData.length + 30);
+        };
+
+
+        $scope.cancel = function(){
+            ngDialog.close();
+        };
+
+        $scope.showInfo = function(person) {
+            ngDialog.open({
+                template: 'modalDialog.html',
+                className: 'ngdialog-theme-default',
+                data: {
+                    myProperty: person
+                }
+            });
         }
+
     }]);

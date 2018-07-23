@@ -26,6 +26,8 @@ public class DocServiceImpl implements DocService{
     }
 
     public List<Doctor> getDoctorsBySpecialty(int page, int size, String specialty){
-        return repository.findBySpecialty(specialty, PageRequest.of(page, size)).getContent();
+        List<Doctor> someList = repository.findBySpecialty(specialty, PageRequest.of(page, size)).getContent();
+        someList.forEach(Doctor::transferSpecialtiesToString);
+        return someList;
     }
 }

@@ -9,12 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class EntityController {
+public class DoctorController {
 
     final private DocService service;
 
     @Autowired
-    public EntityController(DocService service) {
+    public DoctorController(DocService service) {
         this.service = service;
     }
 

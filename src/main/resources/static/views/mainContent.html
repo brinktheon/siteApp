@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="contentCtrl">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -11,21 +11,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a ui-sref="PharmacisSpec({valueSpec:'Pharmacis'})"> Pharmacis </a></td>
-                            </tr>
-                            <tr>
-                                <td><a ui-sref="AllergistSpec({valueSpec:'Allergist'})"> Allergist </a></td>
-                            </tr>
-                            <tr>
-                                <td><a ui-sref="CardiologistSpec({valueSpec:'Cardiologist'})"> Cardiologist </a></td>
-                            </tr>
-                            <tr>
-                                <td><a ui-sref="GynecologistSpec({valueSpec:'Gynecologist'})"> Gynecologist </a></td>
-                            </tr>
-                            <tr>
-                                <td><a ui-sref="OtolaryngologistSpec({valueSpec:'Otolaryngologist'})"> Otolaryngologist </a></td>
-                            </tr>
+                        <tr ng-repeat="item in someData">
+                            <td><a ui-sref="SomeSpec({valueSpec:'{{item.name}}'})">{{item.name}}</a></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

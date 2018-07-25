@@ -29,4 +29,12 @@ angular.module('MainService', [])
                 });
         };
 
+        this.getContentData = function(){
+            return  $http.get("/api/specialties?page=0&size=10")
+                .then(function(response){
+                    return response.data;
+                });
+        };
+
+
     }]);
